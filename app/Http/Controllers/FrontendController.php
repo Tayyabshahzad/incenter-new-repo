@@ -320,7 +320,7 @@ class FrontendController extends Controller
             'message'=>"Data Added"
         ]);
         } catch (Exception $content_error) {
-            dd($content_error);
+            
             return response([
                 'status'=>false,
                 'message'=>"Error While Uploading File"
