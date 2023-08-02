@@ -40,8 +40,7 @@ class ProcessExcelDataJob implements ShouldQueue
             $import = new ExcelImport($this->sourcing);
             Excel::import($import, $this->path);
         } catch (Exception $content_error) {
-            // Handle the exception here if needed
-            // You can log the error or perform any other action
+            dd($content_error);
         }
     }
 }
