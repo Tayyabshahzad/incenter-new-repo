@@ -1,5 +1,5 @@
 @extends('layouts.consortia')
-@section('content')
+@section('content') 
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
@@ -289,6 +289,7 @@
                 }
             });
         }); 
-        $('.state').val("{{  $county->state }}")
+       
+        $('.state').val("{{  $county->CountyState->id }}")
     </script>
 @endsection

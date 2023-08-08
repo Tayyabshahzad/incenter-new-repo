@@ -208,7 +208,7 @@ class FrontendController extends Controller
     public function counties_edit(Request $request,$id)
     {   
         $states = State::get();
-        $county = County::findOrFail($id);
+        $county = County::with('CountyState')->findOrFail($id); 
         return view('edit_county',compact('county','states'));
        
     }
@@ -217,7 +217,7 @@ class FrontendController extends Controller
     public function counties_update(Request $request)
     {   
         $county = County::findOrFail($request->id); 
-        $county->state  = $request->state;
+        $county->state_id  = $request->state;
         $county->county  = $request->county;
         $county->appeal_deadline  =  $request->appeal_deadline;
         $county->re_review_date  =  $request->re_review_date;
