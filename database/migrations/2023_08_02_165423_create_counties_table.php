@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('counties', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('state');
-            $table->foreign('state')->references('id')->on('states')->onDelete('cascade');  
+            $table->unsignedBigInteger('state_id');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');  
             $table->string('county')->nullable();
             $table->date('appeal_deadline')->nullable();
             $table->date('re_review_date')->nullable(); 

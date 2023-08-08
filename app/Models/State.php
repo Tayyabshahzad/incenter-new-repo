@@ -9,7 +9,7 @@ class State extends Model
 {
     use HasFactory;
 
-    public function county(){
+    public function counties(){
         return $this->hasMany(State::class);
     }
 }

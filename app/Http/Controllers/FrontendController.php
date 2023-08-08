@@ -167,14 +167,16 @@ class FrontendController extends Controller
     {   
 
         $states = State::get();
-        $counties = County::with('state')->get(); 
+        $counties = County::with('CountyState')->get(); 
+        
         if ($request->ajax()) {
+             
             return datatables()->of($counties)
                 ->addColumn('action',function($countie){
                     return "<a href='".route('counties.edit',$countie->id)."'> Edit  </a> | <a href='".route('counties.delete',$countie->id)."'> Delete  </a>";
                 })
-                ->addColumn('county_state',function($counties){
-                    return  1;
+                ->addColumn('county_state',function($countie){
+                    return  $countie->CountyState->state;
                 })
             ->rawColumns(['action','county_state'])
             ->toJson();
@@ -194,7 +196,7 @@ class FrontendController extends Controller
         
  
         $county = new County();
-        $county->state  = $request->state;
+        $county->state_id  = $request->state;
         $county->county  = $request->county;
         $county->appeal_deadline  =  $request->appeal_deadline;
         $county->re_review_date  =  $request->re_review_date;

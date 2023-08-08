@@ -9,7 +9,7 @@ class County extends Model
 {
     use HasFactory;
 
-    public function state(){
-        return $this->belongsTo(State::class);
+    public function CountyState(){
+        return $this->belongsTo(State::class,'state_id');
     }
 }

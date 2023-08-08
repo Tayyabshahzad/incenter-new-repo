@@ -365,7 +365,7 @@
             serverSide: true,
             ajax: '{{ route("counties") }}', // Replace "users.data" with your data route in Laravel
             columns: [ 
-                { data: 'state', name: 'state' },
+                { data: 'county_state', name: 'county_state' },
                 { data: 'county', name: 'county' },
                 { data: 'appeal_deadline', name: 'appeal_deadline' },
                 { data: 're_review_date', name: 're_review_date' },
