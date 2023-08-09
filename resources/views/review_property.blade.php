@@ -91,13 +91,18 @@
                             <table  class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" id="review_property">
                                 <!--begin::Table head-->
                                 <thead>
+                                     
+
                                     <tr class="fw-bold text-dark fs-6"> 
-                                        <th class="min-w-150px">Owner Legal Name</th>
-                                        <th class="min-w-150px">Address </th>
-                                        <th class="min-w-150px">Record Added</th>
-                                        <th class="min-w-150px">Source</th>
-                                        <th class="min-w-150px">Status</th>
-                                        <th class="min-w-150px">House Estimate $</th>
+                                        <th class="min-w-150px"> Owner Full Name</th>
+                                        <th class="min-w-150px"> Address </th>
+                                        <th class="min-w-150px"> State</th>
+                                        <th class="min-w-150px"> County</th>
+                                        <th class="min-w-150px"> CLR</th>
+                                        <th class="min-w-150px"> Assessment</th> 
+                                        <th class="min-w-150px"> Assessed Market Value (Propmix)</th>
+                                        <th class="min-w-150px"> Status </th>
+                                        
                                     </tr>
                                 </thead> 
                             </table>
@@ -145,13 +150,14 @@
                 columns: [
                     
                     { data: 'owner1fullname', name: 'owner1fullname' },
-                    { data: 'owner1fullname', name: 'owner1fullname' },
-                    { data: 'owner1fullname', name: 'owner1fullname' },
-                    { data: 'owner1fullname', name: 'owner1fullname' },
-                    { data: 'owner1fullname', name: 'owner1fullname' },
-                    { data: 'owner1fullname', name: 'owner1fullname' },
-                     
-                     
+                    { data: 'address', name: 'address' },   
+                    { data: 'state', name: 'state' },   
+                    { data: 'county', name: 'county' },    
+                    { data: 'clr_if_any', name: 'clr_if_any' },
+                    { data: 'assessment', name: 'assessment' }, 
+                    { data: 'estimated_market_value_api', name: 'estimated_market_value_api' },               
+                    { data: 'status', name: 'status' },
+                 
                      
                 ],
                 dom: 'Bfrtip', // Add 'Bfrtip' to enable the buttons

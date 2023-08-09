@@ -220,8 +220,23 @@
                 </div>
                 <!--begin::Form-->
                 <form   class="form fv-plugins-bootstrap5 fv-plugins-framework"  id="uploadForm" enctype="multipart/form-data">
-                    @csrf
-                    
+                    @csrf 
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <a class="btn btn-link add_new_source_button"   href="#" role="button"><i class="bi bi-plus fs-2 text-dark fw-bold"></i>Add Source</a>
+                        </div>
+
+                        <div class="col-12 row  ">
+                            <div class="col-8 text-end">
+                                <input type="text" class="new_source form-control d-none" >
+                            </div>
+                            <div class="col-4 text-left">
+                                <button type="button" class="btn btn-sm btn-info add_new_source d-none"> Add </button>
+                            </div> 
+                        </div>
+
+
+                    </div>
                     <!--begin::Input group-->
                     <div class="row fv-row fv-plugins-icon-container">
                         <div class="col-xl-12">
@@ -230,11 +245,11 @@
                                     Source
                                 </span>
                             </label>
-                            <select name="source"  id="source" class="form-select form-select-solid" data-control="select2"
+                            <select name="source"  id="source" class="form-select form-select-solid source" data-control="select2"
                                 data-hide-search="true">
                                 <option value="" selected>SELECT</option>
                                 <option value="boa">BOA</option>
-                                <option value="citi_bank">Citi Bank</option>   
+                                <option value="citi_bank">Citi Bank</option>  
                             </select>
                             <div class="fv-plugins-message-container invalid-feedback">
                             </div>
@@ -416,6 +431,25 @@
                         // Any cleanup or UI changes after the request completes
                     }
                 });
+            });
+            $('.add_new_source_button').click(function(){
+                    $(this).addClass('d-none')
+                    $('.new_source').val('')
+                    $('.new_source').removeClass('d-none')
+                    $('.add_new_source').removeClass('d-none')
+            });
+            $('.add_new_source').click(function() {
+                var new_source = $('.new_source').val(); 
+                if(new_source == ''){
+                    alert('Enter New Source Value')
+                }else{
+                    
+                    $('.new_source').addClass('d-none')
+                    $('.add_new_source').addClass('d-none')
+                    $('#source').append('<option value="'+new_source+'"> '+new_source+' </option>');
+                    $('.add_new_source_button').removeClass('d-none')
+                }
+               
             });
         });
 

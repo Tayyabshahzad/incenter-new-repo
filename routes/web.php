@@ -77,8 +77,7 @@ Route::group(['middleware' => ['auth','verified'],'namespace'=>'App\Http\Control
     Route::post('manage-users/update', [FrontendController::class, 'update_user'])->name('update_user.manage');
     Route::post('addUser', [FrontendController::class, 'addUser'])->name('addUser'); 
     Route::get('manage-properties', [FrontendController::class, 'manage_properties'])->name('manage.properties');
-    Route::get('import-properties', [FrontendController::class, 'import_properties'])->name('import.properties');
-    Route::post('import-properties-via-excel', [FrontendController::class, 'import_properties_excel'])->name('import.properties.via.excel');
+    Route::get('import-properties', [FrontendController::class, 'import_properties'])->name('import.properties'); 
     Route::get('review-properties', [FrontendController::class, 'review_properties'])->name('review.properties'); 
     Route::get('counties', [FrontendController::class, 'counties'])->name('counties');
     Route::get('/counties/edit/{id}', [FrontendController::class, 'counties_edit'])->name('counties.edit');
@@ -88,6 +87,10 @@ Route::group(['middleware' => ['auth','verified'],'namespace'=>'App\Http\Control
     Route::get('propmix', [FrontendController::class, 'propmix'])->name('propmix');  
     Route::get('fetch_property', [FrontendController::class, 'fetch_property'])->name('fetch_property');  
 
+});
+
+Route::group(['middleware' => ['auth','verified'],'namespace'=>'App\Http\Controllers'], function () {
+    Route::post('import-properties-via-excel', [FrontendController::class, 'import_properties_excel'])->name('import.properties.via.excel');
 });
 
 

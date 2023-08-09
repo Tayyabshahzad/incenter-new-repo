@@ -280,8 +280,7 @@
                                             <th class="min-w-150px"> Assessed Market Value </th>
                                             <th class="min-w-150px"> Assessed Market Value (Propmix)</th>
                                             <th class="min-w-150px"> Status </th>
-                                            <th class="min-w-150px"> Details </th> 
-
+                                            <th class="min-w-150px"> Details </th>  
                                         </tr>
                                     </thead> 
                                     <tbody>

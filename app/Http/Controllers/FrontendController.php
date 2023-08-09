@@ -78,10 +78,8 @@ class FrontendController extends Controller
     public function manage_properties(Request $request)
     {   
 
-        $properties = Property::select('id','owner1fullname','address','state','county','clr_if_any','assessment','assessed_market_value','estimated_market_value_api','is_verified')->with('source')->get();
-    
-        if ($request->ajax()) {
-           
+        $properties = Property::select('id','owner1fullname','address','state','county','clr_if_any','assessment','assessed_market_value','estimated_market_value_api','is_verified')->with('source')->get(); 
+        if ($request->ajax()) { 
             return datatables()->of($properties)
             ->addColumn('view_details',function($property){
                 
@@ -151,15 +149,32 @@ class FrontendController extends Controller
     public function review_properties(Request $request)
     {   
        
-        $properties = Property::orderby('id','desc')->limit(5)->with('source','user')->get();  
-        if ($request->ajax()) {
+        
+        $properties = Property::select('id','owner1fullname','address','state','county','clr_if_any','assessment','assessed_market_value','estimated_market_value_api','is_verified')->with('source')->where('estimated_market_value_api',0)->get(); 
+        
+        if ($request->ajax()) { 
             return datatables()->of($properties)
-            ->addColumn('create_date',function($property){
-                return $property->date;
-            })
-            ->rawColumns(['create_date'])
+            ->addColumn('view_details',function($property){
+                
+                return "<button class='btn btn-info btn-sm fetch_property'   data-bs-toggle='modal'    data-bs-target='#kt_modal_property_details' data-id='".$property->id."'> View </button>";
+            }) 
+            ->addColumn('source',function($property_source){
+                return $property_source->source;
+            }) 
+            ->addColumn('status',function($property_source){
+                if( $property_source->is_verified == true){
+                    $status = 'Verified';
+                }else{
+                    $status = 'Not-Verified';
+                }
+                return $status;
+            }) 
+            
+            ->rawColumns(['view_details','source','status'])
             ->toJson();
-        }   
+        }
+
+
         return view('review_property');
     }
     
@@ -223,7 +238,7 @@ class FrontendController extends Controller
         $county->re_review_date  =  $request->re_review_date;
         $county->clr  =  $request->clr;
         $county->save(); 
-        return redirect()->back();
+        return redirect()->route('counties');
     }
 
     public function counties_delete(Request $request,$id)
@@ -340,7 +355,8 @@ class FrontendController extends Controller
         $properties->chunk($chunkSize)->each(function ($chunk) { 
             
             foreach ($chunk as $property) { 
-                 
+               
+                
                 VerifyPropertyJob::dispatch($property);
             } 
         });
