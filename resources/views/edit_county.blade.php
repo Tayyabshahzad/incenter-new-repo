@@ -86,7 +86,7 @@
                                                 <span class="required">Appeal Deadline</span>
                                             </label>
                                             <input type="date" name="appeal_deadline" value="{{ $county->appeal_deadline  }}" required
-                                                class="form-control bg-transparent">
+                                                class="form-control bg-transparent appeal_deadline">
                                             <div class="fv-plugins-message-container invalid-feedback">
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                                                 <span class="required">Re-Review Date</span>
                                             </label>
                                             <input type="date" name="re_review_date"   value="{{ $county->re_review_date  }}" required
-                                                class="form-control bg-transparent">
+                                                class="form-control bg-transparent re_review_date">
                                             <div class="fv-plugins-message-container invalid-feedback">
                                             </div>
                                         </div>
@@ -125,6 +125,7 @@
                                                 Update
                                             </span>
                                         </button>
+                                        <br><br>
                                     </div>
                                     <!--end::Actions-->
                                 </form>
@@ -291,5 +292,14 @@
         }); 
        
         $('.state').val("{{  $county->CountyState->id }}")
+        $(document).ready(function() {
+      $('.appeal_deadline').on('change', function() {
+        var appealDeadline = new Date($(this).val());
+        var reReviewDate = new Date(appealDeadline.getTime());
+        reReviewDate.setDate(reReviewDate.getDate() - 60);
+        var formattedReReviewDate = reReviewDate.toISOString().slice(0, 10);
+        $('.re_review_date').val(formattedReReviewDate);
+      });
+    });
     </script>
 @endsection
